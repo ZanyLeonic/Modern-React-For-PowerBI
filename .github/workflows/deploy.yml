@@ -1,8 +1,8 @@
 name: Deploy WebApp to Azure Static Web Apps on push or pull request
 
 env:
-    CLIENTID: ${{ vars.CLIENTID }}
-    TENANTID: ${{ vars.TENANTID }}
+    ClientId: ${{ vars.CLIENTID }}
+    TenantId: ${{ vars.TENANTID }}
 
 on:
   push:
