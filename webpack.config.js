@@ -3,16 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './App/index.tsx',
+  entry: path.resolve(__dirname, './App/index.tsx'),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/bundle.js",
     publicPath: "/"
   },
-  cache: {
-    type: "filesystem"
-  },
   resolve: {
+    modules: [
+      "node_modules",
+      path.resolve(__dirname)
+    ],
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
   },
   module: {
@@ -39,13 +40,5 @@ module.exports = {
     },
     compress: true,
     port: 5000
-  },
-  experiments: {
-    lazyCompilation: {
-      entries: true,
-      imports: true,
-    },
-    cacheUnaffected: true,
-   
   }
 }
