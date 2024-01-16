@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
+require('dotenv').config();
 
 module.exports = {
   mode: 'development',
@@ -24,11 +26,14 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
     ]
   },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: 'App/index.html'
-      })
-    ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'App/index.html'
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
+    })
+  ],
   optimization: {
     splitChunks: {
       chunks: 'async',
