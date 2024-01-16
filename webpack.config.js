@@ -6,7 +6,8 @@ module.exports = {
   entry: path.resolve(__dirname, './App/index.tsx'),
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "js/bundle.js",
+    chunkFilename: 'scripts/[name].[chunkhash].bundle.js',
+    filename: 'scripts/[name].[chunkhash].bundle.js', // the file name would be my entry's name with a ".bundle.js" suffix
     publicPath: "/"
   },
   resolve: {
@@ -28,6 +29,37 @@ module.exports = {
         template: 'App/index.html'
       })
     ],
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 17000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        shared: {
+          name: 'common',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        defaultVendors: false,
+        reactPackage: {
+          test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/,
+          name: 'react',
+          chunks: "all",
+          priority: 10,
+        }
+      },
+    },
+  },
   devServer: {
     hot: true,
     static: {
