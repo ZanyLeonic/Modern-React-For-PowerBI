@@ -1,10 +1,12 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require("webpack");
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 require('dotenv').config();
 
 module.exports = {
-  mode: 'development',
   entry: path.resolve(__dirname, './App/index.tsx'),
   infrastructureLogging: {
     level: 'verbose',
@@ -31,7 +33,17 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'App/index.html'
+      template: path.resolve(__dirname, './templates/app.html'),
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './templates/app.html'),
+      filename: '404.html'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+          { from: 'public' }
+      ]
     }),
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(process.env),
