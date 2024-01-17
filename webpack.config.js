@@ -6,6 +6,9 @@ require('dotenv').config();
 module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, './App/index.tsx'),
+  infrastructureLogging: {
+    level: 'verbose',
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     chunkFilename: 'scripts/[name].[chunkhash].bundle.js',
