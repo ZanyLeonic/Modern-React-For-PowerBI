@@ -19,3 +19,12 @@ A sample SPA implementing User-Owns-Data embedding using React-JS with functiona
 ## Deployment
 
 An example deployment file (for GitHub) to deploy to Azure Static Web Apps should be located in the `.github/workflows` folder.
+
+You will need to declare your ClientId and TenantId in the environment within your pipeline for it work. 
+
+## Example .env
+
+```bash
+TenantId="xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+ClientId="xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+```
