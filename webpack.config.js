@@ -4,8 +4,6 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-require('dotenv').config();
-
 module.exports = {
   entry: path.resolve(__dirname, './App/index.tsx'),
   infrastructureLogging: {
@@ -46,7 +44,7 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      "process.env": JSON.stringify(process.env),
+      "process.env": JSON.stringify(require('dotenv').config().parsed),
     })
   ],
   optimization: {
