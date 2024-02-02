@@ -1,0 +1,23 @@
+# An example Azure Pipelines file for building and publishing this SPA to Azure Static Web Apps
+variables:
+- group: static-app
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+ - checkout: self
+   submodules: true
+
+ - task: AzureStaticWebApp@0
+   displayName: "Deploying to Azure Static Web Apps"
+   inputs:
+     app_location: "/"
+     output_location: "dist/"
+     azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
+   env:
+    ClientId: $(CLIENT_ID)
+    TenantId: $(TENANT_ID)
